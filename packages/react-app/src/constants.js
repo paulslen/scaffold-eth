@@ -24,6 +24,13 @@ const localRpcUrl = process.env.REACT_APP_CODESPACES
   : "http://" + (global.window ? window.location.hostname : "localhost") + ":8545";
 
 export const NETWORKS = {
+  paullen: {
+    name: "paullen",
+    color: "#666666",
+    chainId: 131337,
+    blockExplorer: "",
+    rpcUrl: localRpcUrl,
+  },
   localhost: {
     name: "localhost",
     color: "#666666",
