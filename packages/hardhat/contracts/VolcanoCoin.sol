@@ -29,12 +29,6 @@ contract VolcanoCoin is Ownable {
         return balance;
     }
 
-   // function viewPayment(address _address) public view returns(Payment[] memory) {
-        //Payment[] memory _payments;
-        //_payments = paymentRecords[msg.sender];
-   //     return payments[_address]; // 0 is just the first tx for testing, but really I do not understand waht I should be returning here.
-   // }
-
     function paymentsByAddress(address addr) public view returns (Payment[] memory) {
         return paymentRecords[addr];
     }
