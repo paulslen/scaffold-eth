@@ -32,10 +32,18 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     log: true,
     waitConfirmations: 5,
   });
+  await deploy("NFTProject", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    args: [ "MyNFT", "PN" ],
+    log: true,
+    waitConfirmations: 5,
+  });
 
   // Getting a previously deployed contract
   const YourContract = await ethers.getContract("YourContract", deployer);
   const VolcanoCoin = await ethers.getContract("VolcanoCoin", deployer);
+  const NFTProject = await ethers.getContract("NFTProject", deployer);
   /*  await YourContract.setPurpose("Hello");
   
     // To take ownership of yourContract using the ownable library uncomment next line and add the 
@@ -90,3 +98,4 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 };
 module.exports.tags = ["YourContract"];
 module.exports.tags = ["VolcanoCoin"];
+module.exports.tags = ["NFTProject"];
