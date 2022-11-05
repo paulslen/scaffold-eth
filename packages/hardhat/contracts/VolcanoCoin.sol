@@ -3,25 +3,26 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 struct Payment{
         address recipient;
         uint256 amount;
     }
 
-contract VolcanoCoin is Ownable {
+contract VolcanoCoin is Ownable, ERC20{
 
-    uint256 totalSupply = 10000;
+    uint256 totSupply = 10000;
     uint256 totalSupplyIncrement = 1000;
-    event supplyChange(uint totalSupply);
+    event supplyChange(uint totSupply);
     event transferEvent(uint amount, address receiver);
     
     Payment[] public payments;
     mapping(address => uint) public balances;
     mapping(address => Payment[]) public paymentRecords;
 
-    constructor() {
-        balances[owner()] = totalSupply;
+    constructor(string memory name, string memory symbol) ERC20(name, symbol) {
+        _mint(owner(), totSupply);
     }
 
     function getBalance(address _address) public view returns(uint256) {
@@ -40,13 +41,13 @@ contract VolcanoCoin is Ownable {
         paymentRecords[_sender].push(_payment);
     }
 
-    function getTotalSupply() public view returns(uint256) {
-        return totalSupply;
+    function getTotSupply() public view returns(uint256) {
+        return totSupply;
     }
 
     function increaseSupply() public onlyOwner {
-        totalSupply = totalSupply + totalSupplyIncrement;
-        emit supplyChange(totalSupply);
+        totSupply = totSupply + totalSupplyIncrement;
+        emit supplyChange(totSupply);
     }
 
     function transfer(uint256 _amount, address _to) public {
